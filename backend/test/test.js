@@ -211,3 +211,32 @@ describe("Student Endpoints", () => {
     });
   });
 });
+// ...
+
+it("POST /addStudent should show a newly added student", async () => {
+  // add new student
+  await requestWithSupertest.post("/addStudent").send({
+    "id": 99999,
+    "name": "Rashini Shehara",
+    "age": 12,
+    "religion": "Buddhism",  // Adjust based on your schema
+    "hometown": "Galle"
+  });
+
+  const res = await requestWithSupertest.get("/listStudents");
+  expect(res.status).toEqual(200);
+  let body = res.body;
+
+  expect(body.length).toBe(4)
+
+  expect(body).toContainEqual({
+    "id": 99999,
+    "name": "Rashini Shehara",
+    "age": 12,
+    "religion": "Buddhism",  // Adjust based on your schema
+    "hometown": "Galle"
+  });
+});
+
+// ...
+
