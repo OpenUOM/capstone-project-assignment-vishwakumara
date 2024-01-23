@@ -1,5 +1,6 @@
+// Inside add-new-teacher.component.ts
 import { Component, OnInit } from '@angular/core';
-import {AppServiceService} from '../../app-service.service';
+import { AppServiceService } from '../../app-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,25 +10,26 @@ import { Router } from '@angular/router';
 })
 export class AddNewTeacherComponent implements OnInit {
 
-  constructor(private service : AppServiceService, private router: Router) { }
+  constructor(private service: AppServiceService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  createTeacher(value){
-
+  createTeacher(value) {
     const teacher = {
-      id : value.id,
-      name : value.name,
-      age : value.age
-    }
+      id: value.id,
+      name: value.name,
+      age: value.age
+    };
 
-
-    this.service.addTeacher(teacher).subscribe((response)=>{
-      this.router.navigate([''])
-    },(error)=>{
-      console.log('ERROR - ', error)
-    })
+    this.service.addTeacher(teacher).subscribe(
+      (response) => {
+        this.router.navigate(['']);
+      },
+      (error) => {
+        console.log('ERROR - ', error);
+      }
+    );
   }
 
 }
